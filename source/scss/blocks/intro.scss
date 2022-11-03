@@ -93,6 +93,14 @@
   text-transform: uppercase;
   font-size: 2.4rem;
   line-height: 1.27;
+  opacity: 0;
+
+  .screen.active & {
+    animation-name: slideIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
+  }
 
   @media (min-width: $stop-scaling) {
     width: 509px;
@@ -104,6 +112,10 @@
     max-width: 100%;
     font-size: 1.6rem;
     line-height: 1.2;
+
+    .screen.active & {
+      animation-duration: 0.3s;
+    }
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
@@ -111,6 +123,10 @@
     max-width: 100%;
     font-size: 1.6rem;
     line-height: 1.2;
+
+    .screen.active & {
+      animation-duration: 0.2s;
+    }
   }
 
   p {
@@ -160,5 +176,22 @@
   @media (min-width: $stop-scaling) {
     margin: 0 0 0 -5px;
     font-size: 48px;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(15%);
+  }
+
+  50% {
+    opacity: 0.2;
+    transform: translateY(5%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

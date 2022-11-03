@@ -96,6 +96,24 @@
   max-width: 34rem;
   font-size: 1.8rem;
   line-height: 2rem;
+  opacity: 0;
+
+  .swiper-slide-next &,
+  .swiper-slide-active & {
+    animation-name: slideRightToLeft;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0, 0, 0, 0.89);
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+
+  .swiper-slide-active & {
+    animation-delay: 0.3s;
+  }
+
+  .swiper-slide-next & {
+    animation-delay: 0.4s;
+  }
 
   @media (min-width: $stop-scaling) {
     margin-top: 36px;
@@ -112,6 +130,14 @@
     min-height: 11.6rem;
     font-size: 1.4rem;
     line-height: 1.5rem;
+
+    .swiper-slide-next & {
+      animation: none;
+    }
+
+    .swiper-slide-active & {
+      animation-delay: 0.2s;
+    }
   }
 
   @media (max-width: $mobile) and (orientation: landscape) {
@@ -274,5 +300,21 @@
       height: 0.4rem;
       background-color: $c-light;
     }
+  }
+}
+
+@keyframes slideRightToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(5%);
+  }
+
+  70% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

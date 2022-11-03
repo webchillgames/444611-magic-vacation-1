@@ -3,7 +3,6 @@
 
   &:hover {
     .social-block__list {
-      opacity: 1;
       pointer-events: auto;
     }
   }
@@ -35,6 +34,8 @@
     background-color: $c-light;
     border: 2px solid $c-light;
     z-index: -1;
+
+    transition: width 0.5s, height 0.5s ease-in;
   }
 
   svg {
@@ -47,11 +48,22 @@
   &:hover,
   .social-block--active & {
     color: $c-purple;
+  }
 
+  .social-block--active &:not(:hover) {
     &::before {
-      width: 112.5%;
-      height: 112.5%;
+      background-color: $c-purple;
+      border-color: $c-purple;
     }
+
+    svg {
+      color: $c-light;
+    }
+  }
+
+  &:hover::before {
+    width: 112.5%;
+    height: 112.5%;
   }
 
   &:focus {
@@ -63,7 +75,6 @@
     }
 
     & + .social-block__list {
-      opacity: 1;
       pointer-events: auto;
     }
   }
@@ -146,6 +157,8 @@
     flex: none;
     margin-bottom: 0.5rem;
 
+    opacity: 0;
+
     @media (min-width: $stop-scaling) {
       margin-bottom: 5px;
     }
@@ -158,6 +171,24 @@
       margin: 0 1.25rem;
     }
   }
+
+  .social-block--active & {
+    li {
+      animation-name: scale;
+      animation-duration: 0.1s;
+      animation-fill-mode: forwards;
+      animation-iteration-count: 1;
+      animation-timing-function: ease-in;
+    }
+
+    li:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    li:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+  }
 }
 
 .social-block__link {
@@ -168,6 +199,8 @@
   color: $c-light;
   border: 2px solid transparent;
   border-radius: 50%;
+
+  transition: transform 0.2s ease;
 
   @media (min-width: $stop-scaling) {
     width: 40px;
@@ -186,6 +219,8 @@
 
   &:hover {
     color: $c-purple;
+
+    transform: scale(0.9);
   }
 
   &:focus {
@@ -240,5 +275,22 @@
         height: 10px;
       }
     }
+  }
+}
+
+@keyframes scale {
+  0% {
+    opacity: 0;
+    transform: scale(0) translateY(10px);
+  }
+
+  10% {
+    opacity: 0.7;
+    transform: scale(0.5) translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }
