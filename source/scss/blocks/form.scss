@@ -2,6 +2,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .form__label {
@@ -30,39 +31,84 @@
 }
 
 .form__field {
-  flex: none;
-  margin-right: 3rem;
-  padding: 0 5.6rem;
-  height: 6rem;
+  position: relative;
   width: calc(100% - 21rem);
-  text-transform: uppercase;
-  font: inherit;
-  font-size: 2.4rem;
-  line-height: 1.2;
-  color: $c-dark;
-  border: 0;
-  border-radius: 3rem;
-  outline: none;
+  margin-right: 3rem;
+  height: 6rem;
 
-  &:focus {
-    border: 1px solid $c-purple;
+  label {
+    position: absolute;
+    top: 50%;
+    left: 2rem;
+    z-index: 1;
+    color: rgba($c-dark, 0.5);
+    text-transform: uppercase;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation-name: increaseOpacity;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0, 0.32, 0, 0.33);
+    animation-fill-mode: forwards;
+    animation-delay: 0.6s;
+  }
+
+  input {
+    flex: none;
+    padding: 0 5.6rem;
+    text-transform: uppercase;
+    font: inherit;
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: $c-dark;
+    border: 0;
+    border-radius: 3rem;
+    outline: none;
+
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    animation-name: increaseWidth;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0, 0.32, 0, 0.33);
+    animation-fill-mode: forwards;
+
+    &:focus {
+      border: 1px solid $c-purple;
+    }
+
+    @media (min-width: $stop-scaling) {
+      padding: 0 56px;
+      font-size: 24px;
+      border-radius: 30px;
+    }
+
+    @media (orientation: portrait) {
+      padding: 0 2.5rem;
+      font-size: 1.6rem;
+
+      animation-duration: 0.3s;
+    }
+
+    @media (max-width: $mobile) and (orientation: landscape) {
+      padding: 0 2.5rem;
+      font-size: 1.6rem;
+
+      animation-duration: 0.2s;
+    }
   }
 
   @media (min-width: $stop-scaling) {
     margin-right: 30px;
-    padding: 0 56px;
     height: 60px;
     width: calc(100% - 210px);
-    font-size: 24px;
-    border-radius: 30px;
   }
 
   @media (orientation: portrait) {
     margin-right: 1rem;
-    padding: 0 2.5rem;
     width: calc(100% - 5rem);
     height: 4rem;
-    font-size: 1.6rem;
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
@@ -71,15 +117,13 @@
 
   @media (max-width: $mobile) and (orientation: landscape) {
     margin-right: 1rem;
-    padding: 0 2.5rem;
     width: calc(100% - 5rem);
     height: 4rem;
-    font-size: 1.6rem;
   }
 }
 
 .form__button {
-  flex-grow: 1;
+  flex-shrink: 0;
 
   @media (orientation: portrait) {
     position: relative;
@@ -144,5 +188,25 @@
     @media (max-width: $mobile) and (orientation: landscape) {
       width: calc(100% - 5rem);
     }
+  }
+}
+
+@keyframes increaseWidth {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes increaseOpacity {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
