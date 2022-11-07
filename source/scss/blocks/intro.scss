@@ -100,6 +100,7 @@
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
+    animation-delay: 1s;
   }
 
   @media (min-width: $stop-scaling) {
@@ -115,6 +116,7 @@
 
     .screen.active & {
       animation-duration: 0.3s;
+      animation-delay: 0.5s;
     }
   }
 
@@ -126,6 +128,7 @@
 
     .screen.active & {
       animation-duration: 0.2s;
+      animation-delay: 0.3s;
     }
   }
 

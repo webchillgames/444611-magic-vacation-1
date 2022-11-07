@@ -47,10 +47,21 @@
   background-color: $c-light;
   z-index: 1;
 
+  transform: translateY(100%);
+  transition-property: transform;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0,1,1,1);
+
+  .page-loaded & {
+    transform: translateY(0);
+  }
+
   @media (max-width: $tablet) and (orientation: portrait) {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 0 3.6rem 0 0;
+
+    transition-duration: 0.2s;
 
     &.screen__footer--full {
       width: 100%;
