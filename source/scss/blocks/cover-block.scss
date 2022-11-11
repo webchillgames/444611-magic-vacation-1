@@ -1,23 +1,17 @@
 .cover-block {
   position: absolute;
-  top: 100%;
+  top: 0;
   height: 100%;
   width: 100%;
   left: 0;
-  right: 0;
   background-color: $c-dark;
-  z-index: 100;
-  transition: top 1s ease;
+  z-index: 0;
+  transition: transform 1s ease;
+
+  transform: translate3d(0, 100%, 0);
 }
 
 .cover-block.active {
-  top: 0;
+  transform: translate3d(0, 0, 0);
+  z-index: 5;
 }
-
-// 1 анимация фона - предыдущий экран не исчезает:
-
-//  - остановить переход по ссылке ЕСЛИ переход с Истории на призы
-// - проиграть анимацию -
-// по таймеру сделать переход по ссылке
-
-// 2 переключение на другую страницу
