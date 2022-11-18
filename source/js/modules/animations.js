@@ -1,7 +1,12 @@
 export default () => {
   const body = document.querySelector(`body`);
-  const prizeMenuLink = document.querySelector(`[data-href="prizes"]`);
   const pageContent = document.querySelector(`.page-content`);
+
+  const prizeMenuLink = document.querySelector(`[data-href="prizes"]`);
+
+  const rulesPage = document.querySelector(`.rules`);
+  const buttonGo = document.querySelector(`.rules__link`);
+  const gamePage = document.querySelector(`.game`);
 
   if (!prizeMenuLink || !pageContent) {
     return;
@@ -15,8 +20,21 @@ export default () => {
 
     pageContent.appendChild(coverBlock);
 
+    if (window.location.hash === `#rules`) {
+      gamePage.classList.add(`active`);
+    }
+
     if (window.location.hash === `#story`) {
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
+    }
+
+    if (window.location.hash === `#rules`) {
+      rulesPage.classList.add(`active`);
+      buttonGo.classList.add(`animated`);
+
+      buttonGo.addEventListener(`transitionend`, () => {
+        buttonGo.classList.remove(`animated`);
+      });
     }
   });
 
@@ -33,8 +51,26 @@ export default () => {
     if (to !== `prizes` || (to === `prizes` && from !== `story`)) {
       coverBlock.classList.remove(`active`);
     }
-  });
 
+    if (to === `rules`) {
+      rulesPage.classList.add(`active`);
+
+      buttonGo.classList.add(`animated`);
+
+      buttonGo.addEventListener(`transitionend`, () => {
+        buttonGo.classList.remove(`animated`);
+      });
+    } else {
+      rulesPage.classList.remove(`active`);
+      buttonGo.classList.remove(`animated`);
+    }
+
+    if (to === `game`) {
+      gamePage.classList.add(`active`);
+    } else {
+      gamePage.classList.remove(`active`);
+    }
+  });
 
   function changeTransitionByLink(e) {
     e.preventDefault();

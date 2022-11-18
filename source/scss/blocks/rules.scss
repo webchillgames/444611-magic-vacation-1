@@ -161,11 +161,7 @@
     text-align: center;
 
     transform: scale(0);
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-
-    .page-loaded & {
-      transform: scale(1);
-    }
+    color: rgba(255,255,255, 0);
 
     @media (max-width: $tablet) and (orientation: portrait) {
       top: 1rem;
@@ -191,49 +187,8 @@
     transform: translate3d(5%, 0, 0);
     transition: transform 0.5s, opacity 0.5s ease-out;
 
-    .page-loaded & {
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-    }
-
     @media (max-width: $tablet) and (orientation: portrait) {
       min-height: calc(1.4rem * 2.2);
-    }
-  }
-
-  &:first-child {
-    p {
-      transition-delay: 0.15s;
-    }
-  }
-
-  &:nth-child(2) {
-    &::before {
-      transition-delay: 0.25s;
-    }
-
-    p {
-      transition-delay: 0.5s;
-    }
-  }
-
-  &:nth-child(3) {
-    &::before {
-      transition-delay: 0.5s;
-    }
-
-    p {
-      transition-delay: 0.75s;
-    }
-  }
-
-  &:last-child {
-    &::before {
-      transition-delay: 0.75s;
-    }
-
-    p {
-      transition-delay: 1s;
     }
   }
 }
@@ -243,28 +198,23 @@
   bottom: 6rem;
   right: 5.6rem;
 
-  opacity: 0;
-  width: 0;
+  border-radius: 3.5rem;
+
+  &::before {
+    top: 0;
+    left: 0;
+    position: absolute;
+    transform: translate(65%, 0);
+    opacity: 0;
+  }
 
   &::after {
     content: 'Погнали!';
     position: static;
-    white-space: wrap;
+    white-space: normal;
 
     opacity: 0;
-    transition: opacity 0.5s ease-out 1.3s;
-  }
-
-  .page-loaded & {
-    animation-name: btnScale30;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-delay: 1s;
-
-    &::after {
-      opacity: 1;
-    }
+    transition: opacity 0.5s ease-out 2s;
   }
 
   @media (min-width: $stop-scaling) {
@@ -276,10 +226,6 @@
     left: 0;
     right: 0;
     bottom: 4rem;
-
-    .page-loaded & {
-      animation-name: btnScale100;
-    }
   }
 
   @media (max-width: $tablet) and (orientation: landscape) {
@@ -292,34 +238,90 @@
   }
 }
 
-@keyframes btnScale30 {
-  0% {
-    opacity: 0;
-    width: 0;
+.rules.active {
+  .rules__link {
+    &.animated {
+      overflow: hidden;
+    }
+
+    &::before {
+      @include animation(increaseFromCircle, 1s, ease-in, 0.8s, 1, normal, forwards);
+    }
+
+    &::after {
+      opacity: 1;
+    }
+
+    @media (max-width: $tablet) and (orientation: portrait) {
+      left: auto;
+      &::before {
+        @include animation(increaseFromCircleMobile, 1s, ease-in, 0.8s, 1, normal, forwards);
+      }
+      width: 100%;
+    }
   }
 
-  10% {
-    opacity: 1;
-  }
+  .rules__item {
+    &::before {
+      @include animation(bounce, 0.25s, cubic-bezier(0.34, 1.56, 0.64, 1), 0s, 1, normal, forwards);
+    }
 
-  100% {
-    opacity: 1;
-    width: 30%;
+    p {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    &:first-child {
+      p {
+        transition-delay: 0.15s;
+      }
+    }
+
+    &:nth-child(2) {
+      &::before {
+        animation-delay: 0.25s;
+      }
+
+      p {
+        transition-delay: 0.5s;
+      }
+    }
+
+    &:nth-child(3) {
+      &::before {
+        animation-delay: 0.5s;
+      }
+
+      p {
+        transition-delay: 0.75s;
+      }
+    }
+
+    &:last-child {
+      &::before {
+        animation-delay: 0.75s;
+      }
+
+      p {
+        transition-delay: 1s;
+      }
+    }
   }
 }
 
-@keyframes btnScale100 {
+@keyframes bounce {
   0% {
-    opacity: 0;
-    width: 0;
+    transform: scale(0);
+    color: rgba(255, 255, 255, 0);
   }
 
-  10% {
-    opacity: 1;
+  90% {
+    transform: scale(1);
+    color: rgba(255, 255, 255, 0);
   }
 
   100% {
-    opacity: 1;
-    width: 100%;
+    transform: scale(1);
+    color: rgba(255,255,255, 1);
   }
 }
