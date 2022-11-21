@@ -96,11 +96,7 @@
   opacity: 0;
 
   .screen.active & {
-    animation-name: slideIn;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-    animation-delay: 1s;
+    animation: slideIn 0.264s ease-out 1.056s 1 forwards;
   }
 
   @media (min-width: $stop-scaling) {

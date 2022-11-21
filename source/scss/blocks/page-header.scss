@@ -36,13 +36,11 @@
   width: 10rem;
   color: $c-light;
 
-  transform: translateX(-4rem);
+  transform: translate3d(-4rem, 0, 0);
   opacity: 0;
-  transition: transform 0.5s, opacity 0.3s cubic-bezier(0,1,1,1) 0.3s;
 
   .page-loaded & {
-    opacity: 1;
-    transform: translateX(0);
+    animation: logoSlideIn 0.165s cubic-bezier(0, 1, 1, 1) 0.132s forwards;
   }
 
   @media (min-width: $stop-scaling) {
@@ -57,8 +55,11 @@
     width: 6.8rem;
     z-index: 1;
 
-    transform: translateX(-0.9rem);
-    transition: transform 0.4s, opacity 0.2s cubic-bezier(0,1,1,1) 0.2s;
+    transform: translate3d(-0.9rem, 0, 0);
+
+    .page-loaded & {
+      animation-name: logoSlideInTablet;
+    }
 
     .page-header--menu-opened & {
       color: $c-dark;
@@ -71,8 +72,11 @@
     width: 6.8rem;
     z-index: 1;
 
-    transform: translateX(-1rem);
-    transition: transform 0.3s, opacity 0.1s cubic-bezier(0,1,1,1) 0.1s;
+    transform: translate3d(-1rem, 0, 0);
+
+    .page-loaded & {
+      animation-name: logoSlideInMobile;
+    }
 
     .page-header--menu-opened & {
       color: $c-dark;
@@ -147,7 +151,7 @@
   align-items: center;
 
   opacity: 0;
-  transition: opacity 0.6s cubic-bezier(0,1,1,1) 0.5s;
+  transition: opacity 0.165s cubic-bezier(0, 1, 1, 1) 0.198s;
 
   .page-loaded & {
     opacity: 1;
@@ -264,6 +268,8 @@
     color: inherit;
     padding: 0 0.5em 0.5em;
 
+    overflow: hidden;
+
     &::after {
       content: "";
       position: absolute;
@@ -274,7 +280,7 @@
       width: 0;
       right: 0;
 
-      transition: width 0.4s cubic-bezier(0,1,1,1);
+      transition: width 0.363s cubic-bezier(0,1,1,1);
 
       @media (max-width: $tablet) and (orientation: portrait) {
         left: 0;
@@ -294,7 +300,7 @@
         display: block;
         left: 0;
 
-        transition: width 0.4s cubic-bezier(0,1,1,1) 0.5s;
+        transition: width 0.4s cubic-bezier(0, 1, 1, 1) 0.198s;
 
         .page-loaded & {
           width: 100%;
@@ -333,5 +339,53 @@
   @media (max-width: $mobile) and (orientation: landscape) {
     margin-left: 0;
     width: 100%;
+  }
+}
+
+@keyframes logoSlideIn {
+  0% {
+    transform: translate3d(-4rem, 0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes logoSlideInTablet {
+  0% {
+    transform: translate3d(-0.9rem, 0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes logoSlideInMobile {
+  0% {
+    transform: translate3d(-1rem, 0, 0);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.1;
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
   }
 }
