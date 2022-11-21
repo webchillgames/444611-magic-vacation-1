@@ -100,7 +100,7 @@
     }
 
     input {
-      @include animation(increaseFromCircleMobile, 2s, ease-in, 0s, 1, normal, forwards)
+      animation: increaseFromCircleMobile 2s ease-in 0s 1 normal forwards;
     }
   }
 
