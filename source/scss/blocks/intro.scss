@@ -157,6 +157,13 @@
   font-size: 2.4rem;
   line-height: 1.2;
 
+  opacity: 0;
+  transition: opacity 0.33s ease-out 0.264s;
+
+  .animated & {
+    opacity: 1;
+  }
+
   @media (min-width: $stop-scaling) {
     margin: 0 0 16px;
     width: 250px;

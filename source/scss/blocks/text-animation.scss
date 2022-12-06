@@ -1,0 +1,23 @@
+.text-animation {
+  &__word {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    line-height: inherit;
+    font-size: inherit;
+  }
+
+  &__char {
+    line-height: inherit;
+    font-size: inherit;
+    transform: translate3d(0, 120%, 0);
+
+    display: flex;
+    transition-property: transform;
+    transition-timing-function: ease-out;
+
+    .animated & {
+      transform: translate3d(0, 20%, 0);
+    }
+  }
+}
