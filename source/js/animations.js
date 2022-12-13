@@ -146,7 +146,7 @@ export default () => {
       const mainSpanEl = document.createElement(`span`);
       mainSpanEl.classList.add(`text-animation__word`);
 
-      d.map((char, i) => {
+      d.forEach((char, i) => {
         if (char !== ` `) {
           const spanEl = document.createElement(`span`);
           spanEl.innerHTML = char;

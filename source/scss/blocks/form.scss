@@ -207,21 +207,11 @@
 
   .form__button {
     opacity: 0;
-    animation: appearFromOpacity 0.3s ease-out 0.363s 1 forwards;
+    animation: fadeIn 0.3s ease-out 0.363s 1 forwards;
 
     span {
       opacity: 0;
-      animation: appearFromOpacity 0.1s ease-out 0.528s 1 forwards;
+      animation: fadeIn 0.1s ease-out 0.528s 1 forwards;
     }
-  }
-}
-
-@keyframes appearFromOpacity {
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
   }
 }
