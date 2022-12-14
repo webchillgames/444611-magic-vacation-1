@@ -22,6 +22,84 @@
   }
 }
 
+.win-2__images {
+  position: absolute;
+  width: 646px;
+  height: 100%;
+  left: 26%;
+
+  img {
+    position: absolute;
+    display: block;
+    opacity: 0;
+
+    // flamingo
+    &:first-child {
+      width: 41%;
+      left: 16%;
+      bottom: 17%;
+      z-index: 2;
+
+      transform-origin: center;
+      transform: translate3d(0, 100%, 0) rotate(-60deg);
+      animation: flamingoAppear 0.528s ease-out 1 forwards, flamingoSwinging 1.528s infinite ease-in-out 0.528s;
+    }
+
+    // blue leaf right
+    &:nth-child(2) {
+      width: 43%;
+      right: 3%;
+      bottom: 28%;
+      z-index: 0;
+
+      transform-origin: left;
+      transform: translate3d(-10%, 20%, 0) rotate(-30deg);
+      animation: rightLeafAppear 1.551s cubic-bezier(0.61, 1, 0.88, 1) 0.264s 1 forwards;
+    }
+
+    // blue leaf left
+    &:nth-child(3) {
+      width: 43%;
+      left: 0;
+      bottom: 17%;
+      z-index: 0;
+
+      transform-origin: right;
+      transform: translate3d(10%, -30%, 0) rotate(30deg);
+      animation: leftLeafAppear 1.551s cubic-bezier(0.61, 1, 0.88, 1) 0.264s 1 forwards;
+    }
+
+    // green leaf
+    &:nth-child(4) {
+      right: 0;
+      bottom: 24%;
+      width: 52%;
+      z-index: 0;
+
+      transform-origin: left;
+      transform: translateY(-20%) rotate(-20deg);
+      animation: greenLeafAppear 1.551s cubic-bezier(0.61, 1, 0.88, 1) 0.3s forwards;
+    }
+
+    // suitcase
+    &:last-child {
+      width: 53%;
+      left: 22%;
+      bottom: 17%;
+      z-index: 1;
+
+      opacity: 1;
+      transform: translate3d(0, 100%, 0) scale(0);
+      animation: suitcaseAppear 0.528s cubic-bezier(0.34, 1.56, 0.64, 1) 1 forwards;
+    }
+  }
+
+  @media (max-width: $tablet) {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 .result__image {
   position: absolute;
   top: 0;
@@ -34,23 +112,11 @@
   align-items: center;
   z-index: -1;
 
+  box-shadow: 0 0 5px 0 red;
+
   @media (orientation: portrait) {
     left: -1rem;
     right: -1rem;
-  }
-
-  picture {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
   }
 }
 
@@ -266,5 +332,125 @@
     @media (max-width: $mobile) and (orientation: landscape) {
       width: 45rem;
     }
+  }
+}
+
+@keyframes flamingoAppear {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 100%, 0) rotate(-60deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes flamingoSwinging {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, 10%, 0) rotate(-5deg);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes suitcaseAppear {
+  0% {
+    transform: translate3d(0, 100%, 0) scale(0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes greenLeafAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%) rotate(-20deg);
+  }
+
+  20% {
+    transform: translateY(0) rotate(20deg);
+  }
+
+  40% {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  60% {
+    transform: translateY(0) rotate(5deg);
+  }
+
+  80% {
+    transform: translateY(0) rotate(-3deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes rightLeafAppear {
+  0% {
+    opacity: 0;
+    transform: translate3d(-10%, 20%, 0) rotate(-30deg);
+  }
+
+  20% {
+    transform: translate3d(0, 0, 0) rotate(30deg);
+  }
+
+  40% {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+
+  80% {
+    transform: translate3d(0, 0, 0) rotate(-5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0);
+  }
+}
+
+@keyframes leftLeafAppear {
+  0% {
+    opacity: 0;
+    transform: translate3d(10%, -30%, 0) rotate(30deg);
+  }
+
+  20% {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+
+  40% {
+    transform: translate3d(0, 0, 0) rotate(10deg);
+  }
+
+  60% {
+    transform: translate3d(0, 0, 0) rotate(-5deg);
+  }
+
+  80% {
+    transform: translate3d(0, 0, 0) rotate(5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0);
   }
 }

@@ -8,7 +8,7 @@ import result from './modules/result.js';
 import form from './modules/form.js';
 import social from './modules/social.js';
 import FullPageScroll from './modules/full-page-scroll';
-import animations from './modules/animations.js';
+import animations from './animations.js';
 
 // init modules
 mobileHeight();
