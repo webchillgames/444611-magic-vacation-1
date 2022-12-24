@@ -10,6 +10,7 @@ export default () => {
   const buttonGo = document.querySelector(`.rules__link`);
   const gamePage = document.querySelector(`.game`);
 
+
   // INTRO
   const introTitle = document.querySelector(`.intro__title`);
   const introInfo = document.querySelector(`.intro__info`);
@@ -18,15 +19,7 @@ export default () => {
   const sliderTitle = document.querySelector(`.slider__item-title`);
   const coverBlock = createEl({tag: `div`, cssClass: `cover-block`});
 
-  // const resultScreen = document.querySelector(`.screen--show`);
-
-  // if (resultScreen) {
-  //   resultScreen.classList.add(`active`);
-  // }
-  // if (!prizeMenuLink || !pageContent) {
-  //   return;
-  // }
-
+  const storyPage = document.querySelector(`.screen--story`);
 
   window.addEventListener(`load`, () => {
     document.body.classList.add(`page-loaded`); // анимируется header
@@ -53,7 +46,8 @@ export default () => {
 
     if (window.location.hash === `#story`) {
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
-      sliderTitle.classList.add(`animated`);
+
+      storyPage.classList.add(`animated`);
     }
 
     if (window.location.hash === `#rules`) {
@@ -118,6 +112,12 @@ export default () => {
 
       introTitle.classList.remove(`animated`);
       introInfo.classList.remove(`animated`);
+    }
+
+    if (to === `story`) {
+      storyPage.classList.add(`animated`);
+    } else {
+      storyPage.classList.remove(`animated`);
     }
   });
 
