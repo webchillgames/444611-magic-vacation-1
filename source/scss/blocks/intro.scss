@@ -52,6 +52,8 @@
   }
 }
 
+
+
 .intro__content {
   display: flex;
   align-items: flex-end;
@@ -95,7 +97,7 @@
   line-height: 1.27;
   opacity: 0;
 
-  .screen.active & {
+  .animated & {
     animation: slideIn 0.264s ease-out 1.056s 1 forwards;
   }
 
@@ -160,7 +162,7 @@
   opacity: 0;
   transition: opacity 0.33s ease-out 0.264s;
 
-  .animated & {
+  .title-animated & {
     opacity: 1;
   }
 

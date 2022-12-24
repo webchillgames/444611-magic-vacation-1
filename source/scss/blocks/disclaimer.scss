@@ -23,6 +23,17 @@
     font-size: 1.2rem;
     line-height: 1.2;
 
+    opacity: 0;
+    transition: opacity 0.2s;
+
+    a {
+      padding: 0.8rem 0;
+    }
+
+    .disclaimer-fade-in & {
+      opacity: 1;
+    }
+
     @media (min-width: $stop-scaling) {
       font-size: 12px;
     }

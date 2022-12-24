@@ -238,9 +238,9 @@
   }
 }
 
-.rules.active {
+.animated {
   .rules__link {
-    &.animated {
+    &.btn-animated {
       overflow: hidden;
     }
 

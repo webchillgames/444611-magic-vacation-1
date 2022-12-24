@@ -16,7 +16,7 @@
     transition-property: transform;
     transition-timing-function: ease-out;
 
-    .animated & {
+    .title-animated & {
       transform: translate3d(0, 20%, 0);
     }
   }
