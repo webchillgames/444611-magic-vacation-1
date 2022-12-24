@@ -128,16 +128,12 @@
 }
 
 .animated {
-  .slider__item-text {
-    animation: slideRightToLeft 0.297s cubic-bezier(0, 0, 0, 0.89) 1 forwards;
-  }
-
  .swiper-slide-active .slider__item-text {
-    animation-delay: 0.396s;
+    animation: slideRightToLeft 0.297s cubic-bezier(0, 0, 0, 0.89) 0.396s 1 forwards;
   }
 
    .swiper-slide-next .slider__item-text {
-    animation-delay: 0.594s;
+    animation: slideRightToLeft 0.297s cubic-bezier(0, 0, 0, 0.89) 0.594s 1 forwards;
   }
 
   @media (orientation: portrait) {
