@@ -58,6 +58,7 @@ export default () => {
 
     // STORY
     if (window.location.hash === `#story`) {
+      setModeBySliderChage();
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
 
       changeClass.add(storyPage, `animated`);
@@ -116,10 +117,12 @@ export default () => {
     // STORY
 
     if (to === `story`) {
+      setModeBySliderChage();
       changeClass.add(storyPage, `animated`);
       changeClass.add(sliderTitle, `title-animated`);
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
     } else {
+      deleteSliderModeClasses();
       changeClass.remove(storyPage, `animated`);
       changeClass.remove(sliderTitle, `title-animated`);
       prizeMenuLink.removeEventListener(`click`, changeTransitionByLink);
@@ -176,44 +179,52 @@ export default () => {
     }
   });
 
+  function setModeBySliderChage() {
+    if (swiper && sliderControls) {
+      if (swiper.activeIndex === 0) {
+        changeClass.add(body, `slider-mode-purple`);
+      } else {
+        changeClass.remove(body, `slider-mode-purple`);
+      }
 
-  if (swiper && sliderControls) {
-    if (swiper.activeIndex === 0) {
-      changeClass.add(body, `slider-mode-purple`);
-    } else {
-      changeClass.remove(body, `slider-mode-purple`);
-    }
+      sliderControls.forEach((control) => {
+        control.addEventListener(`click`, () => {
+          if (swiper.activeIndex === 0) {
+            changeClass.add(body, `slider-mode-purple`);
+          } else {
+            changeClass.remove(body, `slider-mode-purple`);
+          }
 
-    sliderControls.forEach((control) => {
-      control.addEventListener(`click`, () => {
-        if (swiper.activeIndex === 0) {
-          changeClass.add(body, `slider-mode-purple`);
-        } else {
-          changeClass.remove(body, `slider-mode-purple`);
-        }
+          if (swiper.activeIndex === 2) {
+            changeClass.add(body, `slider-mode-blue`);
+          } else {
+            changeClass.remove(body, `slider-mode-blue`);
+          }
 
-        if (swiper.activeIndex === 2) {
-          changeClass.add(body, `slider-mode-blue`);
-        } else {
-          changeClass.remove(body, `slider-mode-blue`);
-        }
+          if (swiper.activeIndex === 4) {
+            changeClass.add(body, `slider-mode-light`);
+          } else {
+            changeClass.remove(body, `slider-mode-light`);
+          }
 
-        if (swiper.activeIndex === 4) {
-          changeClass.add(body, `slider-mode-light`);
-        } else {
-          changeClass.remove(body, `slider-mode-light`);
-        }
-
-        if (swiper.activeIndex === 6) {
-          changeClass.add(body, `slider-mode-dark`);
-        } else {
-          changeClass.remove(body, `slider-mode-dark`);
-        }
+          if (swiper.activeIndex === 6) {
+            changeClass.add(body, `slider-mode-dark`);
+          } else {
+            changeClass.remove(body, `slider-mode-dark`);
+          }
+        });
       });
-    });
-
+    }
   }
 
+  function deleteSliderModeClasses() {
+    const classNames = body.classList;
+    for (let className of classNames) {
+      if (className.startsWith(`slider-mode`)) {
+        body.classList.remove(className);
+      }
+    }
+  }
 
   function slideInDisclaimer() {
     pageContent.appendChild(createDisclaimer());
