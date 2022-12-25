@@ -188,7 +188,7 @@ export default () => {
       control.addEventListener(`click`, () => {
         if (swiper.activeIndex === 0) {
           changeClass.add(body, `slider-mode-purple`);
-        } else {a
+        } else {
           changeClass.remove(body, `slider-mode-purple`);
         }
 
