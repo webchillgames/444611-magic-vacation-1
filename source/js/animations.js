@@ -1,4 +1,5 @@
 export default () => {
+  const body = document.querySelector(`body`);
   const pageContent = document.querySelector(`.page-content`);
 
   // PRIZES
@@ -24,6 +25,19 @@ export default () => {
   const prizesPage = document.querySelector(`.screen--prizes`);
   const gamePage = document.querySelector(`.screen--game`);
   const rulesPage = document.querySelector(`.screen--rules`);
+
+  // SLIDER
+  const sliderControls = document.querySelectorAll(`.slider__control`);
+  const swiper = document.querySelector(`.js-slider`).swiper;
+
+  const changeClass = {
+    remove(el, cl) {
+      el.classList.remove(cl);
+    },
+    add(el, cl) {
+      el.classList.add(cl);
+    }
+  };
 
   window.addEventListener(`load`, () => {
     document.body.classList.add(`page-loaded`); // анимируется header
@@ -162,6 +176,45 @@ export default () => {
     }
   });
 
+
+  if (swiper && sliderControls) {
+    if (swiper.activeIndex === 0) {
+      changeClass.add(body, `slider-mode-purple`);
+    } else {
+      changeClass.remove(body, `slider-mode-purple`);
+    }
+
+    sliderControls.forEach((control) => {
+      control.addEventListener(`click`, () => {
+        if (swiper.activeIndex === 0) {
+          changeClass.add(body, `slider-mode-purple`);
+        } else {
+          changeClass.remove(body, `slider-mode-purple`);
+        }
+
+        if (swiper.activeIndex === 2) {
+          changeClass.add(body, `slider-mode-blue`);
+        } else {
+          changeClass.remove(body, `slider-mode-blue`);
+        }
+
+        if (swiper.activeIndex === 4) {
+          changeClass.add(body, `slider-mode-light`);
+        } else {
+          changeClass.remove(body, `slider-mode-light`);
+        }
+
+        if (swiper.activeIndex === 6) {
+          changeClass.add(body, `slider-mode-dark`);
+        } else {
+          changeClass.remove(body, `slider-mode-dark`);
+        }
+      });
+    });
+
+  }
+
+
   function slideInDisclaimer() {
     pageContent.appendChild(createDisclaimer());
 
@@ -176,15 +229,6 @@ export default () => {
     }, 200);
 
   }
-
-  const changeClass = {
-    remove(el, cl) {
-      el.classList.remove(cl);
-    },
-    add(el, cl) {
-      el.classList.add(cl);
-    }
-  };
 
   function changeTransitionByLink(e) {
     e.preventDefault();
