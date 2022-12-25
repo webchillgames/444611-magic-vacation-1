@@ -4,18 +4,32 @@ export default () => {
 
   if (footerTogglers.length) {
     for (let i = 0; i < footerTogglers.length; i++) {
-      const text = document.querySelector(`.screen__footer-wrapper`);
-      const bg = document.querySelector(`.screen__footer-bg`);
+      let text;
+      let bg;
+
+      for (let j of footerTogglers[i].parentElement.children) {
+        if (j.classList.contains(`screen__footer-bg`)) {
+          bg = j;
+        }
+
+        if (j.classList.contains(`screen__footer-wrapper`)) {
+          text = j;
+        }
+      }
 
       footerTogglers[i].addEventListener(`click`, function () {
         let footer = footerTogglers[i].parentNode;
         if (footer.classList.contains(`screen__footer--full`)) {
           text.style.opacity = 0;
-          bg.style.transform = `translate3d(0, 100%, 0)`;
+
+          setTimeout(() => {
+            bg.style.transform = `translate3d(0, 100%, 0)`;
+          }, 400);
 
           setTimeout(() => {
             footer.classList.remove(`screen__footer--full`);
-          }, 400);
+          }, 600);
+
 
         } else {
           footer.classList.add(`screen__footer--full`);
@@ -23,7 +37,7 @@ export default () => {
 
           setTimeout(() => {
             text.style.opacity = 1;
-          }, 200);
+          }, 400);
         }
       });
     }
