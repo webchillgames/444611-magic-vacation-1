@@ -282,6 +282,132 @@
   }
 }
 
+.slider-mode-purple {
+  .social-block__toggler {
+    svg {
+      color: $c-dark;
+    }
+
+    &:focus::before {
+      border-color: $c-dark;
+    }
+  }
+
+  .social-block--active .social-block__toggler {
+    &:hover {
+      svg {
+        color: $c-purple;
+      }
+    }
+
+    &:not(:hover) {
+      svg {
+        color: $c-dark;
+      }
+
+      &::before {
+        border-color: $c-light;
+      }
+    }
+
+    &::before {
+      background-color: $c-light;
+    }
+
+    svg {
+      color: $c-dark;
+    }
+  }
+
+  li:hover a {
+    color: $c-dark;
+  }
+}
+
+.slider-mode-blue {
+  .social-block__toggler {
+    svg {
+      color: $swiper-mode-light;
+    }
+
+    &:focus::before {
+      border-color: $swiper-mode-blue;
+    }
+  }
+
+  .social-block--active .social-block__toggler {
+    &:hover {
+      svg {
+        color: $swiper-mode-blue;
+      }
+    }
+
+    &:not(:hover) {
+      svg {
+        color: $swiper-mode-light;
+      }
+
+      &::before {
+        border-color: $c-light;
+      }
+    }
+
+    &::before {
+      background-color: $c-light;
+    }
+
+    svg {
+      color: $swiper-mode-blue;
+    }
+  }
+
+  li:hover a {
+    color: $swiper-mode-blue;
+  }
+}
+
+.slider-mode-light {
+  .social-block__toggler {
+    svg {
+      color: $swiper-mode-light;
+    }
+
+    &:focus::before {
+      border-color: $swiper-mode-blue;
+    }
+  }
+
+  .social-block--active .social-block__toggler {
+    &:hover {
+      svg {
+        color: $swiper-mode-blue;
+      }
+    }
+
+    &:not(:hover) {
+      svg {
+        color: $swiper-mode-light;
+      }
+
+      &::before {
+        border-color: $c-light;
+      }
+    }
+
+    &::before {
+      background-color: $c-light;
+    }
+
+    svg {
+      color: $swiper-mode-blue;
+    }
+  }
+
+  li:hover a {
+    color: $swiper-mode-light;
+  }
+}
+
 @keyframes scale {
   0% {
     opacity: 0;

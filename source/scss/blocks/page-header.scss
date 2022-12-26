@@ -342,6 +342,36 @@
   }
 }
 
+.slider-mode-purple .page-header__menu {
+  a:hover {
+    color: $c-dark;
+
+    &::after {
+      background-color: $c-dark;
+    }
+  }
+}
+
+.slider-mode-blue .page-header__menu {
+  a:hover {
+    color: $swiper-mode-blue;
+
+    &::after {
+      background-color: $swiper-mode-blue;
+    }
+  }
+}
+
+.slider-mode-light .page-header__menu {
+  a:hover {
+    color: $swiper-mode-light;
+
+    &::after {
+      background-color: $swiper-mode-light;
+    }
+  }
+}
+
 @keyframes logoSlideIn {
   0% {
     transform: translate3d(-4rem, 0, 0);

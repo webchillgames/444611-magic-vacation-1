@@ -1,4 +1,5 @@
 export default () => {
+  const body = document.querySelector(`body`);
   const pageContent = document.querySelector(`.page-content`);
 
   // PRIZES
@@ -6,9 +7,9 @@ export default () => {
   const prizesTitle = document.querySelector(`.prizes__title`);
 
   // RULES
-  const rulesPage = document.querySelector(`.rules`);
   const buttonGo = document.querySelector(`.rules__link`);
-  const gamePage = document.querySelector(`.game`);
+  const rulesMenuLink = document.querySelector(`[data-href="rules"]`);
+
 
   // INTRO
   const introTitle = document.querySelector(`.intro__title`);
@@ -18,51 +19,76 @@ export default () => {
   const sliderTitle = document.querySelector(`.slider__item-title`);
   const coverBlock = createEl({tag: `div`, cssClass: `cover-block`});
 
-  // const resultScreen = document.querySelector(`.screen--show`);
+  // SCREENS
+  const storyPage = document.querySelector(`.screen--story`);
+  const introPage = document.querySelector(`.screen--intro`);
+  const prizesPage = document.querySelector(`.screen--prizes`);
+  const gamePage = document.querySelector(`.screen--game`);
+  const rulesPage = document.querySelector(`.screen--rules`);
 
-  // if (resultScreen) {
-  //   resultScreen.classList.add(`active`);
-  // }
-  // if (!prizeMenuLink || !pageContent) {
-  //   return;
-  // }
+  // SLIDER
+  const sliderControls = document.querySelectorAll(`.slider__control`);
+  const swiper = document.querySelector(`.js-slider`).swiper;
 
+  const changeClass = {
+    remove(el, cl) {
+      el.classList.remove(cl);
+    },
+    add(el, cl) {
+      el.classList.add(cl);
+    }
+  };
 
   window.addEventListener(`load`, () => {
     document.body.classList.add(`page-loaded`); // анимируется header
-
     pageContent.appendChild(coverBlock);
 
-    if (window.location.hash === `#prizes`) {
-      prizesTitle.classList.add(`animated`);
-    }
-
+    // INTRO
     if (window.location.hash === `#top` || window.location.hash === ``) {
-      setTimeout(() => {
-        introTitle.classList.add(`animated`);
-      }, 500);
+      changeClass.add(introPage, `animated`);
 
       setTimeout(() => {
-        introInfo.classList.add(`animated`);
-      }, 1500);
+        introTitle.classList.add(`title-animated`);
+      }, 495);
+
+      setTimeout(() => {
+        introInfo.classList.add(`title-animated`);
+      }, 1485);
     }
 
-    if (window.location.hash === `#rules`) {
-      gamePage.classList.add(`active`);
-    }
-
+    // STORY
     if (window.location.hash === `#story`) {
+      setModeBySliderChage();
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
-      sliderTitle.classList.add(`animated`);
+
+      changeClass.add(storyPage, `animated`);
+      changeClass.add(sliderTitle, `title-animated`);
     }
 
+    // PRIZES
+    if (window.location.hash === `#prizes`) {
+      changeClass.add(prizesPage, `animated`);
+      changeClass.add(prizesTitle, `title-animated`);
+      rulesMenuLink.addEventListener(`click`, changeTransitionByLinkRules);
+    }
+
+    // RULES
+
     if (window.location.hash === `#rules`) {
-      rulesPage.classList.add(`active`);
-      buttonGo.classList.add(`animated`);
+      changeClass.add(buttonGo, `btn-animated`);
+      changeClass.add(rulesPage, `animated`);
 
       buttonGo.addEventListener(`transitionend`, () => {
-        buttonGo.classList.remove(`animated`);
-      });
+        changeClass.remove(buttonGo, `btn-animated`);
+      }); // зачем удалять класс?
+
+      slideInDisclaimer();
+    }
+
+    // GAME
+
+    if (window.location.hash === `#game`) {
+      changeClass.add(gamePage, `animated`);
     }
   });
 
@@ -70,56 +96,150 @@ export default () => {
     const from = getHash(e.oldURL);
     const to = getHash(e.newURL);
 
+    // INTRO
+    if (to === `top` || to === ``) {
+      changeClass.add(introPage, `animated`);
+
+      setTimeout(() => {
+        changeClass.add(introTitle, `title-animated`);
+      }, 495);
+
+      setTimeout(() => {
+        changeClass.add(introInfo, `title-animated`);
+      }, 1485);
+
+    } else {
+      changeClass.remove(introPage, `animated`);
+      changeClass.remove(introTitle, `title-animated`);
+      changeClass.remove(introInfo, `title-animated`);
+    }
+
+    // STORY
+
     if (to === `story`) {
+      setModeBySliderChage();
+      changeClass.add(storyPage, `animated`);
+      changeClass.add(sliderTitle, `title-animated`);
       prizeMenuLink.addEventListener(`click`, changeTransitionByLink);
     } else {
+      deleteSliderModeClasses();
+      changeClass.remove(storyPage, `animated`);
+      changeClass.remove(sliderTitle, `title-animated`);
       prizeMenuLink.removeEventListener(`click`, changeTransitionByLink);
     }
 
+    // PRIZES
+
     if (to !== `prizes` || (to === `prizes` && from !== `story`)) {
-      coverBlock.classList.remove(`active`);
+      changeClass.remove(coverBlock, `active`);
     }
 
     if (to === `prizes`) {
-      prizesTitle.classList.add(`animated`);
+      changeClass.add(prizesPage, `animated`);
+      changeClass.add(prizesTitle, `title-animated`);
+      rulesMenuLink.addEventListener(`click`, changeTransitionByLinkRules);
     } else {
-      prizesTitle.classList.remove(`animated`);
+      rulesMenuLink.removeEventListener(`click`, changeTransitionByLinkRules);
+      changeClass.remove(prizesPage, `animated`);
+      changeClass.remove(prizesTitle, `title-animated`);
     }
+
+    // RULES
+
+    if (to === `rules` && from !== `prizes`) {
+      slideInDisclaimer();
+    }
+
 
     if (to === `rules`) {
-      rulesPage.classList.add(`active`);
-
-      buttonGo.classList.add(`animated`);
+      changeClass.add(buttonGo, `btn-animated`);
+      changeClass.add(rulesPage, `animated`);
 
       buttonGo.addEventListener(`transitionend`, () => {
-        buttonGo.classList.remove(`animated`);
-      });
+        changeClass.remove(buttonGo, `btn-animated`);
+      }); // зачем удалять класс?
     } else {
-      rulesPage.classList.remove(`active`);
-      buttonGo.classList.remove(`animated`);
+      changeClass.remove(buttonGo, `btn-animated`);
+      changeClass.remove(rulesPage, `animated`);
     }
+
+    if (from === `rules`) {
+      const disclaimer = document.querySelector(`.screen__disclaimer`);
+      if (disclaimer) {
+        pageContent.removeChild(disclaimer);
+      }
+    }
+
+    // GAME
 
     if (to === `game`) {
-      gamePage.classList.add(`active`);
+      changeClass.add(gamePage, `animated`);
     } else {
-      gamePage.classList.remove(`active`);
-    }
-
-    if (to === `top`) {
-
-      setTimeout(() => {
-        introTitle.classList.add(`animated`);
-      }, 500);
-
-      setTimeout(() => {
-        introInfo.classList.add(`animated`);
-      }, 1500);
-    } else {
-
-      introTitle.classList.remove(`animated`);
-      introInfo.classList.remove(`animated`);
+      changeClass.remove(gamePage, `animated`);
     }
   });
+
+  function setModeBySliderChage() {
+    if (swiper && sliderControls) {
+      if (swiper.activeIndex === 0) {
+        changeClass.add(body, `slider-mode-purple`);
+      } else {
+        changeClass.remove(body, `slider-mode-purple`);
+      }
+
+      sliderControls.forEach((control) => {
+        control.addEventListener(`click`, () => {
+          if (swiper.activeIndex === 0) {
+            changeClass.add(body, `slider-mode-purple`);
+          } else {
+            changeClass.remove(body, `slider-mode-purple`);
+          }
+
+          if (swiper.activeIndex === 2) {
+            changeClass.add(body, `slider-mode-blue`);
+          } else {
+            changeClass.remove(body, `slider-mode-blue`);
+          }
+
+          if (swiper.activeIndex === 4) {
+            changeClass.add(body, `slider-mode-light`);
+          } else {
+            changeClass.remove(body, `slider-mode-light`);
+          }
+
+          if (swiper.activeIndex === 6) {
+            changeClass.add(body, `slider-mode-dark`);
+          } else {
+            changeClass.remove(body, `slider-mode-dark`);
+          }
+        });
+      });
+    }
+  }
+
+  function deleteSliderModeClasses() {
+    const classNames = body.classList;
+    for (let className of classNames) {
+      if (className.startsWith(`slider-mode`)) {
+        body.classList.remove(className);
+      }
+    }
+  }
+
+  function slideInDisclaimer() {
+    pageContent.appendChild(createDisclaimer());
+
+    const disclaimer = document.querySelector(`.screen__disclaimer`);
+    disclaimer.style.transform = `translate3d(0, 100%, 0)`;
+    document.querySelector(`.screen__disclaimer ul`).style.opacity = 0;
+    disclaimer.style.transition = `all 0.3s`;
+
+    setTimeout(() => {
+      disclaimer.style.transform = `translate3d(0, 0, 0)`;
+      document.querySelector(`.screen__disclaimer ul`).style.opacity = 1;
+    }, 200);
+
+  }
 
   function changeTransitionByLink(e) {
     e.preventDefault();
@@ -129,6 +249,27 @@ export default () => {
       window.location.hash = `#prizes`;
       coverBlock.classList.remove(`active`);
     }, 1000);
+  }
+
+
+  function changeTransitionByLinkRules(e) {
+    e.preventDefault();
+
+    document.querySelector(`.screen--prizes .screen__footer-note p`).style.opacity = 0;
+
+    pageContent.appendChild(createDisclaimer());
+
+    const disclaimer = document.querySelector(`.screen__disclaimer`);
+
+    if (disclaimer) {
+      setTimeout(() => {
+        changeClass.add(disclaimer, `disclaimer-fade-in`);
+      }, 198);
+    }
+
+    setTimeout(() => {
+      window.location.hash = `#rules`;
+    }, 1023);
   }
 
   function getHash(url) {
@@ -184,9 +325,37 @@ export default () => {
   function createEl(options) {
     const {tag, cssClass} = options;
     const blockEl = document.createElement(tag);
-    blockEl.classList.add(cssClass);
+
+    if (cssClass) {
+      blockEl.classList.add(cssClass);
+    }
 
     return blockEl;
+  }
+
+  function createDisclaimer() {
+    const screenDisclaimerEl = createEl({tag: `div`, cssClass: `screen__disclaimer`});
+    const disclaimerEl = createEl({tag: `div`, cssClass: `disclaimer`});
+    const listEl = createEl({tag: `ul`, cssClass: ``});
+    const disclaimerLinks = [
+      {id: 1, title: `Правовая информация`, link: `#`},
+      {id: 2, title: `Подробные правила`, link: `#`}
+    ];
+
+    for (let i = 0; i < disclaimerLinks.length; i++) {
+      const itemEl = createEl({tag: `li`, cssClass: ``});
+      const aEl = createEl({tag: `a`, cssClass: ``});
+      aEl.setAttribute(`href`, disclaimerLinks[i].link);
+      aEl.textContent = disclaimerLinks[i].title;
+      aEl.style.textDecoration = `none`;
+      itemEl.appendChild(aEl);
+      listEl.appendChild(itemEl);
+    }
+
+    disclaimerEl.appendChild(listEl);
+    screenDisclaimerEl.appendChild(disclaimerEl);
+
+    return screenDisclaimerEl;
   }
 
 

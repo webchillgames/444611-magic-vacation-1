@@ -333,7 +333,44 @@
       width: 45rem;
     }
   }
+
+  .result__button {
+
+    span:first-child {
+      width: auto;
+      height: auto;
+      opacity: 0;
+      color: $c-light;
+
+      animation: fadeIn 0.264s ease-out 0s 1 forwards;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    span:last-child {
+      opacity: 0;
+      transform: translateX(-100%) rotate(-90deg);
+
+      animation: spinFromRight 0.33s cubic-bezier(0.49, 0.48, 0.68, 0.67) 0s 1 forwards;
+    }
+  }
 }
+
+// на будущее
+
+// .animated {
+//   .result__button {
+//     span:first-child {
+//       animation: fadeIn 0.264s ease-out 0s 1 forwards;
+//     }
+
+//     span:last-child {
+//       animation: spinFromRight 0.264s cubic-bezier(0.49, 0.48, 0.68, 0.67) 0s 1 forwards;
+//     }
+//   }
+// }
 
 @keyframes flamingoAppear {
   0% {
