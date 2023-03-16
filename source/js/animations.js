@@ -10,7 +10,6 @@ export default () => {
   const buttonGo = document.querySelector(`.rules__link`);
   const rulesMenuLink = document.querySelector(`[data-href="rules"]`);
 
-
   // INTRO
   const introTitle = document.querySelector(`.intro__title`);
   const introInfo = document.querySelector(`.intro__info`);
